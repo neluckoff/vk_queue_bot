@@ -36,8 +36,12 @@ class VkQueue:
     def get_second(self):
         return self.queue[1]
 
-    def search_by_id(self, index):
-        return self.queue[index].get_id()
+    def search_by_id(self):
+        a = []
+        for i in range(len(self.queue)):
+            a.append(self.queue[i].get_id())
+        return a
+
 
     def search_index(self, id):
         return self.queue.index(id)

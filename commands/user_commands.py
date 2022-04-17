@@ -71,7 +71,6 @@ async def answer_q(message: Message):
     else:
         id = new_queue.get_first().get_id()
         await vk.api.messages.send(peer_id=id, message=f'{random_end_answer()} {random_cool_smile()}', random_id=0)
-
         new_queue.del_person(0)
 
         if new_queue.is_empty():
@@ -87,9 +86,9 @@ async def exit_q(message: Message):
         await message.answer(queue_not_created)
     else:
         user = await vk.api.users.get(message.from_id)
-        for i in range(len(new_queue.print_queue())):
-            if user[0].id == new_queue.search_by_id(i):
-                new_queue.del_person(i)
-                await message.answer("🚪 Вы вышли из очереди.")
-            else:
-                await message.answer("📌 Вас нет в очереди.")
+        if user[0].id in new_queue.search_by_id():
+            a = new_queue.search_by_id()
+            new_queue.del_person(a.index(user[0].id))
+            await message.answer("🚪 Вы вышли из очереди.")
+        else:
+            await message.answer("📌 Вас нет в очереди.")

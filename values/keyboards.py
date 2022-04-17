@@ -17,11 +17,10 @@ keyboard_hello = (
 keyboard_admin_menu = (
     Keyboard(one_time=False, inline=False)
     .add(Text('Создать'), color=KeyboardButtonColor.POSITIVE)
+    .row()
     .add(Text('Перемешать'), color=KeyboardButtonColor.PRIMARY)
     .add(Text('Старт'), color=KeyboardButtonColor.PRIMARY)
-    .row()
     .add(Text('Меню'), color=KeyboardButtonColor.PRIMARY)
-    .add(Text('Сделать грязь'), color=KeyboardButtonColor.NEGATIVE)
 ).get_json()
 
 keyboard_join = (
