@@ -45,10 +45,10 @@ class VkQueue:
     def search_index(self, id):
         return self.queue.index(id)
 
-    def dirty_finger(self, index):
+    def dirty_finger(self, index, z_index):
         c = self.queue[index]
-        self.queue[index] = self.queue[0]
-        self.queue[0] = c
+        self.queue[index] = self.queue[z_index]
+        self.queue[z_index] = c
 
 
 
