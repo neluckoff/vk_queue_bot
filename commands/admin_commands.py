@@ -73,3 +73,22 @@ async def start_q(message: Message):
             await vk.api.messages.send(peer_id=id, message=your_next, random_id=0, keyboard=keyboard_answer)
 
 
+@vk.on.private_message(text='Убрать первого')
+async def exit_q(message: Message):
+    if new_queue.is_empty():
+        pass
+    else:
+        user = await vk.api.users.get(message.from_id)
+        if user[0].id in admin_list:
+            id = new_queue.get_first().get_id()
+            await vk.api.messages.send(peer_id=id,
+                                       message=f'{new_queue.get_first().get_name()} '
+                                               f'{new_queue.get_first().get_lastname()} был убран из очереди.',
+                                       random_id=0)
+            new_queue.del_person(0)
+
+            if new_queue.is_empty():
+                pass
+            else:
+                id = new_queue.get_first().get_id()
+                await vk.api.messages.send(peer_id=id, message=your_next, random_id=0, keyboard=keyboard_answer)
