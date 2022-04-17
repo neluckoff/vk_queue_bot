@@ -1,4 +1,4 @@
-from vkbottle import Keyboard, KeyboardButtonColor, Text, OpenLink, Callback
+from vkbottle import Keyboard, KeyboardButtonColor, Text
 
 keyboard_menu = (
         Keyboard(one_time=False, inline=False)
