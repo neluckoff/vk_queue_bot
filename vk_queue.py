@@ -42,7 +42,6 @@ class VkQueue:
             a.append(self.queue[i].get_id())
         return a
 
-
     def search_index(self, id):
         return self.queue.index(id)
 

@@ -6,10 +6,10 @@ from values.strings import *
 from values.keyboards import *
 from vk_queue import Users
 
-from values.json_works import *
+from values.csv_works import *
 
 vk = Blueprint("Only users chat commands")
-data = {'people': []}
+
 
 
 @vk.on.private_message(text=['Начать', 'Ку', 'Привет'])

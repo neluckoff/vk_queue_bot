@@ -4,7 +4,7 @@ from values.strings import *
 from values.keyboards import *
 from values.secrets import admin_list
 from vk_queue import Users
-from values.json_works import *
+from values.csv_works import *
 
 vk = Blueprint("Only admins chat commands")
 
@@ -68,9 +68,11 @@ async def start_q(message: Message):
     else:
         user = await vk.api.users.get(message.from_id)
         if user[0].id in admin_list:
+            users_array = id_users_csv()
             array_q = new_queue.print_queue()
             id = array_q[0].get_id()
             await vk.api.messages.send(peer_id=id, message=your_next, random_id=0, keyboard=keyboard_answer)
+            await vk.api.messages.send(peer_ids=users_array, message="Очередь была запущена!", random_id=0)
 
 
 @vk.on.private_message(text='Убрать первого')
