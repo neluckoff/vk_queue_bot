@@ -66,18 +66,22 @@ async def shaffle_q(message: Message):
 
 @vk.on.private_message(text='Ответил')
 async def answer_q(message: Message):
+    user = await vk.api.users.get(message.from_id)
     if new_queue.is_empty():
         pass
     else:
-        id = new_queue.get_first().get_id()
-        await vk.api.messages.send(peer_id=id, message=f'{random_end_answer()} {random_cool_smile()}', random_id=0)
-        new_queue.del_person(0)
-
-        if new_queue.is_empty():
-            pass
-        else:
+        if new_queue.get_first().get_id() == user[0].id:
             id = new_queue.get_first().get_id()
-            await vk.api.messages.send(peer_id=id, message=your_next, random_id=0, keyboard=keyboard_answer)
+            await vk.api.messages.send(peer_id=id, message=f'{random_end_answer()} {random_cool_smile()}', random_id=0)
+            new_queue.del_person(0)
+
+            if new_queue.is_empty():
+                pass
+            else:
+                id = new_queue.get_first().get_id()
+                await vk.api.messages.send(peer_id=id, message=your_next, random_id=0, keyboard=keyboard_answer)
+        else:
+            await message.answer("Сейчас не твоя очередь!")
 
 
 @vk.on.private_message(text='Выйти')
