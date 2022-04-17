@@ -1,3 +1,3 @@
-token = "e6ecd25a8d2169e7a76d41bcb2d166dcecf048bb3fe720b120797b57738a7f1a9b63d171027664296efe1"
-group_id = 212696063
-admin_list = [146653997]
+token = "" #your group token
+group_id = 0 #example: 212696063
+admin_list = [] #int ids administation
