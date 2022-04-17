@@ -72,7 +72,8 @@ async def start_q(message: Message):
             array_q = new_queue.print_queue()
             id = array_q[0].get_id()
             await vk.api.messages.send(peer_id=id, message=your_next, random_id=0, keyboard=keyboard_answer)
-            await vk.api.messages.send(peer_ids=users_array, message="Очередь была запущена!", random_id=0)
+            await vk.api.messages.send(peer_ids=users_array, message="Очердь стартовала, первому игроку приготовится.",
+                                       random_id=0)
 
 
 @vk.on.private_message(text='Убрать первого')
@@ -94,3 +95,15 @@ async def exit_q(message: Message):
             else:
                 id = new_queue.get_first().get_id()
                 await vk.api.messages.send(peer_id=id, message=your_next, random_id=0, keyboard=keyboard_answer)
+
+
+@vk.on.private_message(text='Сделать грязь')
+async def make_dirty(message: Message):
+    if new_queue.is_empty():
+        await message.answer(queue_not_created)
+    else:
+        user = await vk.api.users.get(message.from_id)
+        if user[0].id in admin_list:
+            for i in range(len(new_queue.print_queue())):
+                new_queue.dirty_finger(i)
+        await message.answer(perem_dirty)
