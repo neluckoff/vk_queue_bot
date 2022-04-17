@@ -73,13 +73,3 @@ async def start_q(message: Message):
             await vk.api.messages.send(peer_id=id, message=your_next, random_id=0, keyboard=keyboard_answer)
 
 
-@vk.on.private_message(text='Сделать грязь')
-async def make_dirty(message: Message):
-    if new_queue.is_empty():
-        await message.answer(queue_not_created)
-    else:
-        user = await vk.api.users.get(message.from_id)
-        if user[0].id in admin_list:
-            for i in range(len(new_queue.print_queue())):
-                new_queue.dirty_finger(i)
-        await message.answer(perem_dirty)
