@@ -76,7 +76,6 @@ async def start_q(message: Message):
             await vk.api.messages.send(peer_id=id, message=your_next, random_id=0, keyboard=keyboard_answer)
 
 
-
 @vk.on.private_message(text='Убрать первого')
 async def exit_q(message: Message):
     if new_queue.is_empty():
@@ -96,3 +95,44 @@ async def exit_q(message: Message):
             else:
                 id = new_queue.get_first().get_id()
                 await vk.api.messages.send(peer_id=id, message=your_next, random_id=0, keyboard=keyboard_answer)
+
+
+@vk.on.private_message(text='Переместиться на <args>')
+async def make_dirty(message: Message, args):
+    if new_queue.is_empty():
+        await message.answer(queue_not_created)
+    else:
+        if args is not None:
+            user = await vk.api.users.get(message.from_id)
+            if user[0].id in admin_list:
+                if args[0].isdigit():
+                    if int(args[0]) <= len(new_queue.print_queue()):
+                        for i in range(len(new_queue.print_queue())):
+                            new_queue.dirty_finger(i, int(args[0]) - 1)
+                        await message.answer(f'Вы переместились на {int(args[0])} позицию в списке.')
+                    else:
+                        await message.answer(f'Вы переборщили с числом, всего в списке '
+                                             f'{len(new_queue.print_queue())} элемента(-ов).')
+                else:
+                    await message.answer('Вы ввели не число!')
+        else:
+            await message.answer("Вы забыли ввести место, на которое хотите встать\nПример: Переместиться на 1")
+
+
+@vk.on.private_message(text='Переместить <args>')
+async def make_dirty(message: Message, args):
+    if new_queue.is_empty():
+        await message.answer(queue_not_created)
+    else:
+        if args is not None:
+            user = await vk.api.users.get(message.from_id)
+            if user[0].id in admin_list:
+                if args[0].isdigit() and args[2].isdigit():
+                    if int(args[0]) <= len(new_queue.print_queue()) and int(args[2]) <= len(new_queue.print_queue()):
+                        new_queue.dirty_finger(int(args[0]) - 1, int(args[2]) - 1)
+                        await message.answer(f'Вы переместили {int(args[0])} на {int(args[2])} позицию в списке.')
+                    else:
+                        await message.answer(f'Вы переборщили с числом, всего в списке '
+                                             f'{len(new_queue.print_queue())} элемента(-ов).')
+                else:
+                    await message.answer('Вы ввели не число!')
