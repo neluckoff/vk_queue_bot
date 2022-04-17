@@ -36,12 +36,17 @@ class VkQueue:
     def get_second(self):
         return self.queue[1]
 
-    def del_by_name(self, user):
-        self.queue.remove(user)
-        a = []
-        for i in self.queue:
-            a.append(i)
-        self.queue = a
+    def search_by_id(self, index):
+        return self.queue[index].get_id()
+
+    def search_index(self, id):
+        return self.queue.index(id)
+
+    def dirty_finger(self, index):
+        c = self.queue[index]
+        self.queue[index] = self.queue[0]
+        self.queue[0] = c
+
 
 
 class Users:
