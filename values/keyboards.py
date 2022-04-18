@@ -21,7 +21,7 @@ keyboard_admin_menu = (
     .row()
     .add(Text('Меню'), color=KeyboardButtonColor.PRIMARY)
     .add(Text('Перемешать'), color=KeyboardButtonColor.PRIMARY)
-    .add(Text("Убрать первого"), color=KeyboardButtonColor.NEGATIVE)
+    .add(Text('Помощь'), color=KeyboardButtonColor.PRIMARY)
 ).get_json()
 
 keyboard_join = (

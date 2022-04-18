@@ -77,7 +77,7 @@ async def start_q(message: Message):
 
 
 @vk.on.private_message(text='Убрать первого')
-async def exit_q(message: Message):
+async def remove_first(message: Message):
     if new_queue.is_empty():
         pass
     else:
@@ -98,7 +98,7 @@ async def exit_q(message: Message):
 
 
 @vk.on.private_message(text='Переместиться на <args>')
-async def make_dirty(message: Message, args):
+async def change_me(message: Message, args):
     if new_queue.is_empty():
         await message.answer(queue_not_created)
     else:
@@ -120,7 +120,7 @@ async def make_dirty(message: Message, args):
 
 
 @vk.on.private_message(text='Переместить <args>')
-async def make_dirty(message: Message, args):
+async def change_person(message: Message, args):
     if new_queue.is_empty():
         await message.answer(queue_not_created)
     else:
@@ -136,3 +136,34 @@ async def make_dirty(message: Message, args):
                                              f'{len(new_queue.print_queue())} элемента(-ов).')
                 else:
                     await message.answer('Вы ввели не число!')
+
+
+@vk.on.private_message(text='Удалить <args>')
+async def change_person(message: Message, args):
+    if new_queue.is_empty():
+        await message.answer(queue_not_created)
+    else:
+        if args is not None:
+            user = await vk.api.users.get(message.from_id)
+            if user[0].id in admin_list:
+                if args[0].isdigit():
+                    if int(args[0]) <= len(new_queue.print_queue()):
+                        await vk.api.messages.send(peer_id=new_queue.get_by_id(int(args[0])-1).get_id(),
+                                                   message=f'{user[0].first_name} {user[0].last_name} убрал Вас из очереди!',
+                                                   random_id=0)
+                        await message.answer(f'Вы удалили {int(args[0])} пользователя!')
+                        new_queue.del_person(int(args[0])-1)
+                    else:
+                        await message.answer(f'Вы переборщили с числом, всего в списке '
+                                             f'{len(new_queue.print_queue())} человек(-а).')
+                else:
+                    await message.answer('Вы ввели не число!')
+        else:
+            await message.answer("Вы не ввели номер пользователя для удаления.")
+
+
+@vk.on.private_message(text='Помощь')
+async def admin_help(message: Message):
+    user = await vk.api.users.get(message.from_id)
+    if user[0].id in admin_list:
+        await message.answer(admin_help_str)
