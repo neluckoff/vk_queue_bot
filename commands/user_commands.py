@@ -11,15 +11,22 @@ from values.csv_works import *
 vk = Blueprint("Only users chat commands")
 
 
-
 @vk.on.private_message(text=['Начать', 'Ку', 'Привет'])
 async def hello(message: Message):
-    await message.answer(hello_str, keyboard=keyboard_reg)
+    await message.answer(hello_str, keyboard=keyboard_hello)
 
 
 @vk.on.private_message(text='Меню')
 async def menu(message: Message):
-    await message.answer(menu_str, keyboard=keyboard_menu)
+    user = await vk.api.users.get(message.from_id)
+    if id_in_csv(user[0].id):
+        await message.answer(menu_str, keyboard=keyboard_menu)
+    else:
+        with open('data.csv', 'a') as outfile:
+            csv_writer = csv.writer(outfile, delimiter=',')
+            csv_writer.writerow([user[0].id, user[0].first_name, user[0].last_name])
+        print(f'Зарегистрирован новый пользователь - {user[0].first_name} {user[0].last_name} - {user[0].id}')
+        await message.answer(menu_str, keyboard=keyboard_menu)
 
 
 @vk.on.private_message(text='Регистрация')
