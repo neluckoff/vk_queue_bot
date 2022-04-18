@@ -1,3 +1,12 @@
+"""
+Code author - @neluckoff
+
+Mail - neluckoff@gmail.com
+tg - @neluckoff
+
+GitHub - https://github.com/neluckoff/vk_queue_bot
+"""
+
 from vkbottle.bot import Bot
 from vkbottle import load_blueprints_from_package
 
