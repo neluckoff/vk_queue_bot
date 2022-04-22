@@ -5,7 +5,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/neluckoff/vk_queue_bot)](https://github.com/neluckoff/vk_queue_bot/issues) 
 [![GitHub forks](https://img.shields.io/github/forks/neluckoff/vk_queue_bot)](https://github.com/neluckoff/vk_queue_bot/network) 
 [![GitHub stars](https://img.shields.io/github/stars/neluckoff/vk_queue_bot)](https://github.com/neluckoff/vk_queue_bot/stargazers) 
-[![GitHub license](https://img.shields.io/github/license/neluckoff/vk_queue_bot)](https://github.com/neluckoff/vk_queue_bot) 
+[![GitHub license](https://img.shields.io/github/license/neluckoff/vk_queue_bot)](https://github.com/neluckoff/vk_queue_bot/blob/master/LICENSE) 
 
 
 ___
