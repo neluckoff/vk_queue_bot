@@ -1,5 +1,10 @@
 # [В]контакте бот для очередей
 
+Бот предназначен для групп людей (одноклассников, одногруппников и т.д.), которым необходимо пользоваться электронной очередью для сдачи практических работ.
+[![GitHub stars](https://img.shields.io/github/stars/neluckoff/vk_queue_bot?style=social)](https://github.com/neluckoff/vk_queue_bot/stargazers)
+
+___
+
 Для написания кода использовалась библиотека [vkbottle](https://github.com/vkbottle/vkbottle).
 Бот полностью готов к вашей эксплуатации, вам остается только заполнить переменные в [secrets.py](https://github.com/neluckoff/vk_queue_bot/blob/master/values/secrets.py).
 
