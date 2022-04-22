@@ -1,7 +1,12 @@
 # [В]контакте бот для очередей
 
 Бот предназначен для групп людей (одноклассников, одногруппников и т.д.), которым необходимо пользоваться электронной очередью для сдачи практических работ.
-[![GitHub stars](https://img.shields.io/github/stars/neluckoff/vk_queue_bot?style=social)](https://github.com/neluckoff/vk_queue_bot/stargazers)
+
+[![GitHub issues](https://img.shields.io/github/issues/neluckoff/vk_queue_bot)](https://github.com/neluckoff/vk_queue_bot/issues) 
+[![GitHub forks](https://img.shields.io/github/forks/neluckoff/vk_queue_bot)](https://github.com/neluckoff/vk_queue_bot/network) 
+[![GitHub stars](https://img.shields.io/github/stars/neluckoff/vk_queue_bot)](https://github.com/neluckoff/vk_queue_bot/stargazers) 
+[![GitHub license](https://img.shields.io/github/license/neluckoff/vk_queue_bot)](https://github.com/neluckoff/vk_queue_bot) 
+
 
 ___
 
