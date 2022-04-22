@@ -10,7 +10,7 @@
 ## УСТАНОВКА
 Для написания кода использовалась библиотека [vkbottle](https://github.com/vkbottle/vkbottle).
 
-Для установки этой библиотеки необходимо открыть терминал и прописать ```npm install vkbottle```
+Для установки этой библиотеки необходимо открыть терминал и прописать ```pip install vkbottle```
 
 ## БЫСТРЫЙ СТАРТ
 Бот полностью готов к вашей эксплуатации, вам остается только заполнить переменные в [secrets.py](https://github.com/neluckoff/vk_queue_bot/blob/master/values/secrets.py).
