@@ -72,7 +72,7 @@ async def start_q(message: Message):
             array_q = new_queue.print_queue()
             id = array_q[0].get_id()
             await vk.api.messages.send(peer_ids=users_array, message="Очердь стартовала, первому игроку приготовиться.",
-                                       random_id=0)
+                                       random_id=0, keyboard=keyboard_saw_queue)
             await vk.api.messages.send(peer_id=id, message=your_next, random_id=0, keyboard=keyboard_answer)
 
 
@@ -180,7 +180,7 @@ async def start_q(message: Message):
             array_q = new_queue.print_queue()
             id = array_q[0].get_id()
             await vk.api.messages.send(peer_ids=users_array, message="Очердь стартовала, первому игроку приготовиться.",
-                                       random_id=0)
+                                       random_id=0, keyboard=keyboard_saw_queue)
             await vk.api.messages.send(peer_id=id, message=your_next, random_id=0, keyboard=keyboard_answer)
 
             new_str = ''

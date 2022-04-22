@@ -44,3 +44,7 @@ keyboard_reg = (
     .add(Text('Регистрация'), color=KeyboardButtonColor.POSITIVE)
 ).get_json()
 
+keyboard_saw_queue = (
+    Keyboard(inline=True)
+    .add(Text('Посмотреть'), color=KeyboardButtonColor.PRIMARY)
+).get_json()
