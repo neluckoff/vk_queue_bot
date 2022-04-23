@@ -54,7 +54,6 @@ class VkQueue:
         self.queue[z_index] = c
 
 
-
 class Users:
     def __init__(self, id: int, name: str, lastname: str):
         self.id = id

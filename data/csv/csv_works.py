@@ -1,9 +1,10 @@
 import csv
+from settings import path
 
 
 def id_users_csv():
     data = []
-    with open('data.csv', mode='r') as infile:
+    with open(path, mode='r') as infile:
         reader = csv.DictReader(infile)
         for row in reader:
             data.append(row["id"])
@@ -12,7 +13,7 @@ def id_users_csv():
 
 def id_in_csv(id):
     result = False
-    with open('data.csv', mode='r') as infile:
+    with open(path, mode='r') as infile:
         reader = csv.DictReader(infile)
         for row in reader:
             if id == int(row['id']):

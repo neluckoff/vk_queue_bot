@@ -1,12 +1,12 @@
 from vkbottle.bot import Blueprint, Message
 
-from values.strings import *
-from values.keyboards import *
-from values.secrets import admin_list
-from vk_queue import Users
-from values.csv_works import *
+from data.strings import *
+from data.keyboards import *
+from misc.vk_queue import Users
+from data.csv.csv_works import id_users_csv
+from settings import admin_list
 
-vk = Blueprint("Only admins chat commands")
+vk = Blueprint("Only admins chat command")
 
 
 @vk.on.private_message(text='Админ-панель')

@@ -1,14 +1,12 @@
 import csv
-
 from vkbottle.bot import Blueprint, Message
+from data.strings import *
+from data.keyboards import *
+from misc.vk_queue import Users
+from data.csv.csv_works import id_in_csv
+from settings import path
 
-from values.strings import *
-from values.keyboards import *
-from vk_queue import Users
-
-from values.csv_works import *
-
-vk = Blueprint("Only users chat commands")
+vk = Blueprint("Only users chat command")
 
 
 @vk.on.private_message(text=['Начать', 'Ку', 'Привет'])
@@ -22,24 +20,11 @@ async def menu(message: Message):
     if id_in_csv(user[0].id):
         await message.answer(menu_str, keyboard=keyboard_menu)
     else:
-        with open('data.csv', 'a') as outfile:
+        with open(path, 'a') as outfile:
             csv_writer = csv.writer(outfile, delimiter=',')
             csv_writer.writerow([user[0].id, user[0].first_name, user[0].last_name])
         print(f'Зарегистрирован новый пользователь - {user[0].first_name} {user[0].last_name} - {user[0].id}')
         await message.answer(menu_str, keyboard=keyboard_menu)
-
-
-@vk.on.private_message(text='Регистрация')
-async def menu(message: Message):
-    user = await vk.api.users.get(message.from_id)
-    if id_in_csv(user[0].id):
-        await message.answer("Вы уже зарегистрированы!")
-    else:
-        with open('data.csv', 'a') as outfile:
-            csv_writer = csv.writer(outfile, delimiter=',')
-            csv_writer.writerow([user[0].id, user[0].first_name, user[0].last_name])
-        print(f'Зарегистрирован новый пользователь - {user[0].first_name} {user[0].last_name} - {user[0].id}')
-        await message.answer("Регистрация завершена.", keyboard=keyboard_hello)
 
 
 @vk.on.private_message(text='Посмотреть')
