@@ -8,9 +8,15 @@ from settings import admin_list
 
 vk = Blueprint("Only admins chat command")
 
+"""
+Модуль со всеми командами администрирования очередью
+"""
+
 
 @vk.on.private_message(text='Админ-панель')
 async def admin_panel(message: Message):
+    """Команда для вызова панели администрации"""
+
     user = await vk.api.users.get(message.from_id)
     if user[0].id in admin_list:
         await message.answer(welcome_admins, keyboard=keyboard_admin_menu)
@@ -20,6 +26,8 @@ async def admin_panel(message: Message):
 
 @vk.on.private_message(text=['Создать', 'Создать <args>'])
 async def create_q(message: Message, args=None):
+    """Команда для создания очереди, как с названием, так и без"""
+
     user = await vk.api.users.get(message.from_id)
     if user[0].id in admin_list:
         if new_queue.is_empty():
@@ -43,6 +51,8 @@ async def create_q(message: Message, args=None):
 
 @vk.on.private_message(text='Очистить')
 async def yes_q(message: Message):
+    """Команда для полной очистки очереди"""
+
     user = await vk.api.users.get(message.from_id)
     if user[0].id in admin_list:
         del check[:]
@@ -52,6 +62,8 @@ async def yes_q(message: Message):
 
 @vk.on.private_message(text='Перемешать')
 async def shaffle_q(message: Message):
+    """Команда для перемешивания очереди"""
+
     if new_queue.is_empty():
         await message.answer(queue_not_created)
     else:
@@ -63,6 +75,8 @@ async def shaffle_q(message: Message):
 
 @vk.on.private_message(text=['Старт', 'Начать очередь'])
 async def start_q(message: Message):
+    """Команда для старта очереди (в личных сообщения боту)"""
+
     if new_queue.is_empty():
         await message.answer(queue_not_created)
     else:
@@ -78,6 +92,8 @@ async def start_q(message: Message):
 
 @vk.on.private_message(text='Убрать первого')
 async def remove_first(message: Message):
+    """Команда для удаления первого пользователя из очереди"""
+
     if new_queue.is_empty():
         pass
     else:
@@ -99,6 +115,8 @@ async def remove_first(message: Message):
 
 @vk.on.private_message(text='Переместиться на <args>')
 async def change_me(message: Message, args):
+    """Команда для перемещения себя на определенную позицию в очереди"""
+
     if new_queue.is_empty():
         await message.answer(queue_not_created)
     else:
@@ -108,7 +126,7 @@ async def change_me(message: Message, args):
                 if args[0].isdigit():
                     if int(args[0]) <= len(new_queue.print_queue()):
                         for i in range(len(new_queue.print_queue())):
-                            new_queue.dirty_finger(i, int(args[0]) - 1)
+                            new_queue.remove_person_place(i, int(args[0]) - 1)
                         await message.answer(f'Вы переместились на {int(args[0])} позицию в списке.')
                     else:
                         await message.answer(f'Вы переборщили с числом, всего в списке '
@@ -121,6 +139,8 @@ async def change_me(message: Message, args):
 
 @vk.on.private_message(text='Переместить <args>')
 async def change_person(message: Message, args):
+    """Команда, чтобы поменять местами пользователей"""
+
     if new_queue.is_empty():
         await message.answer(queue_not_created)
     else:
@@ -129,7 +149,7 @@ async def change_person(message: Message, args):
             if user[0].id in admin_list:
                 if args[0].isdigit() and args[2].isdigit():
                     if int(args[0]) <= len(new_queue.print_queue()) and int(args[2]) <= len(new_queue.print_queue()):
-                        new_queue.dirty_finger(int(args[0]) - 1, int(args[2]) - 1)
+                        new_queue.remove_person_place(int(args[0]) - 1, int(args[2]) - 1)
                         await message.answer(f'Вы переместили {int(args[0])} на {int(args[2])} позицию в списке.')
                     else:
                         await message.answer(f'Вы переборщили с числом, всего в списке '
@@ -140,6 +160,8 @@ async def change_person(message: Message, args):
 
 @vk.on.private_message(text='Удалить <args>')
 async def change_person(message: Message, args):
+    """Удалить пользователя по его месту в очереди"""
+
     if new_queue.is_empty():
         await message.answer(queue_not_created)
     else:
@@ -164,6 +186,8 @@ async def change_person(message: Message, args):
 
 @vk.on.private_message(text='Помощь')
 async def admin_help(message: Message):
+    """Вызов окна с информацией о командах"""
+
     user = await vk.api.users.get(message.from_id)
     if user[0].id in admin_list:
         await message.answer(admin_help_str)
@@ -171,6 +195,8 @@ async def admin_help(message: Message):
 
 @vk.on.message(text='/start')
 async def start_q(message: Message):
+    """Запуск очереди (в беседе и в личных сообщениях)"""
+
     if new_queue.is_empty():
         await message.answer(queue_not_created)
     else:

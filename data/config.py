@@ -1,5 +1,8 @@
 from environs import Env
 
+"""
+Модуль с информацией о сообществе и токене бота
+"""
 
 env = Env()
 env.read_env()
