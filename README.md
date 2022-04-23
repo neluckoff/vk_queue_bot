@@ -4,6 +4,7 @@
 
 <p align="center">
   <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/neluckoff/vk_queue_bot">
+  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/neluckoff/vk_queue_bot">
   <a href="https://github.com/neluckoff/vk_queue_bot/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/neluckoff/vk_queue_bot?color=yellow"></a>
   <a href="https://github.com/neluckoff/vk_queue_bot/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/neluckoff/vk_queue_bot?color=orange"></a>
   <a href="https://github.com/neluckoff/vk_queue_bot/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/neluckoff/vk_queue_bot"></a>
