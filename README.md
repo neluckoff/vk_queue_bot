@@ -2,10 +2,13 @@
 
 Бот предназначен для групп людей (одноклассников, одногруппников и т.д.), которым необходимо пользоваться электронной очередью для сдачи практических работ.
 
-[![GitHub issues](https://img.shields.io/github/issues/neluckoff/vk_queue_bot)](https://github.com/neluckoff/vk_queue_bot/issues) 
-[![GitHub forks](https://img.shields.io/github/forks/neluckoff/vk_queue_bot)](https://github.com/neluckoff/vk_queue_bot/network) 
-[![GitHub stars](https://img.shields.io/github/stars/neluckoff/vk_queue_bot)](https://github.com/neluckoff/vk_queue_bot/stargazers) 
-[![GitHub license](https://img.shields.io/github/license/neluckoff/vk_queue_bot?label=license)](https://github.com/neluckoff/vk_queue_bot) 
+<p align="center">
+  <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/neluckoff/vk_queue_bot">
+  <a href="https://github.com/neluckoff/vk_queue_bot/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/neluckoff/vk_queue_bot?color=yellow"></a>
+  <a href="https://github.com/neluckoff/vk_queue_bot/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/neluckoff/vk_queue_bot?color=orange"></a>
+  <a href="https://github.com/neluckoff/vk_queue_bot/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/neluckoff/vk_queue_bot"></a>
+  <a href="https://github.com/neluckoff/vk_queue_bot/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/neluckoff/vk_queue_bot"></a>
+</p>
 
 ## УСТАНОВКА
 Для написания кода использовалась библиотека [vkbottle](https://github.com/vkbottle/vkbottle).
