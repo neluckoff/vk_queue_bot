@@ -13,7 +13,7 @@
 Для установки этой библиотеки необходимо открыть терминал и прописать ```pip install vkbottle```
 
 ## БЫСТРЫЙ СТАРТ
-Бот полностью готов к вашей эксплуатации, вам остается только заполнить переменные в [secrets.py](https://github.com/neluckoff/vk_queue_bot/blob/master/values/secrets.py).
+В файлах [dotenv](https://github.com/neluckoff/vk_queue_bot/blob/master/.env) и [settings.py](https://github.com/neluckoff/vk_queue_bot/blob/master/settings.py) хранится основная информация о вашем боте, а именно ``token``, ``group_id`` и ``admin_list``.
 
 В переменную ``token`` необходимо создать и записать токен сообщества, в которой у Вас будет находиться бот. Для этого нужно открыть настройки группы, перейти в вкладку "Работа с API" и создать или скопировать уже имеющийся токен.
 
@@ -22,18 +22,16 @@
 В массив переменных ``admin_list`` необходимо вписать ID участников сообщества, у которых будет доступ к командам администрирования очереди.
 
 ## ЭКСКУРСИЯ
-В боте построена небольшая база данных в csv файле - [data.csv](https://github.com/neluckoff/vk_queue_bot/blob/master/data.csv).
-Она добавляет в себя новых пользователей после прописывания команд "**Регистрация**" и "**Меню**" пользователем.
+В боте построена небольшая база данных в csv файле - [data.csv](https://github.com/neluckoff/vk_queue_bot/blob/master/data/csv/data.csv).
+Она добавляет в себя новых пользователей после прописывания команды "**Меню**" (только в том случае, если пользователь еще не был добавлен)
 
-Токен группы, ID группы и ID администрации хранятся в файле [secrets.py](https://github.com/neluckoff/vk_queue_bot/blob/master/values/secrets.py).
+Почти весь текст (реакции на команды и т.д.) хранится в файле [strings.py](https://github.com/neluckoff/vk_queue_bot/blob/master/data/strings.py)
 
-Почти весь текст (реакции на команды и т.д.) хранится в файле [strings.py](https://github.com/neluckoff/vk_queue_bot/blob/master/values/strings.py)
+Все команды разбиты на две категории: [команды администрации](https://github.com/neluckoff/vk_queue_bot/blob/master/commands/admins/admin_commands.py) и [команды пользователей](https://github.com/neluckoff/vk_queue_bot/blob/master/commands/users/user_commands.py), а также хранятся в отдельных файлах.
 
-Все команды разбиты на две категории: [команды администрации](https://github.com/neluckoff/vk_queue_bot/blob/master/commands/admin_commands.py) и [команды пользователей](https://github.com/neluckoff/vk_queue_bot/blob/master/commands/user_commands.py) и хранятся в отдельных файлах.
+Для удобства навигации во время пользования ботом - реализованы [клавиатуры](https://github.com/neluckoff/vk_queue_bot/blob/master/data/keyboards.py), чтобы пользователи не прописывали постоянно команды.
 
-Для удобства навигации во время пользования ботом - реализованы [клавиатуры](https://github.com/neluckoff/vk_queue_bot/blob/master/values/keyboards.py), чтобы пользователи не прописывали постоянно команды.
-
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://i.imgur.com/dXkV3uW.gif"></a></p>
+<p align="center"><a href="https://vk.com/neluckoff" target="_blank"><img src="https://i.imgur.com/dXkV3uW.gif"></a></p>
 
 ## КОМАНДЫ ПОЛЬЗОВАТЕЛЕЙ
 
