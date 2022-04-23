@@ -16,14 +16,12 @@ vk = Blueprint("Only users chat command")
 @vk.on.private_message(text=['Начать', 'Ку', 'Привет'])
 async def hello(message: Message):
     """Стартовая команда"""
-
     await message.answer(hello_str, keyboard=keyboard_hello)
 
 
 @vk.on.private_message(text='Меню')
 async def menu(message: Message):
     """Вызов меню со встроенной регистрацией"""
-
     user = await vk.api.users.get(message.from_id)
     if id_in_csv(user[0].id):
         await message.answer(menu_str, keyboard=keyboard_menu)
@@ -38,7 +36,6 @@ async def menu(message: Message):
 @vk.on.private_message(text='Посмотреть')
 async def check_q(message: Message):
     """Посмотреть существующую очередь"""
-
     if new_queue.is_empty():
         await message.answer(queue_was_empty)
     else:
@@ -54,7 +51,6 @@ async def check_q(message: Message):
 @vk.on.private_message(text='Присоединиться')
 async def shaffle_q(message: Message):
     """Присоединиться к существующей очереди"""
-
     if new_queue.is_empty():
         await message.answer(queue_not_created)
     else:
@@ -93,7 +89,6 @@ async def answer_q(message: Message):
 @vk.on.private_message(text='Выйти')
 async def exit_q(message: Message):
     """Команда для выхода из очереди"""
-
     if new_queue.is_empty():
         await message.answer(queue_not_created)
     else:
