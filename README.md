@@ -11,7 +11,7 @@
 ## УСТАНОВКА
 Для написания кода использовалась библиотека [vkbottle](https://github.com/vkbottle/vkbottle).
 
-Для установки этой библиотеки необходимо открыть терминал и прописать ```pip install vkbottle```
+Для установки всех зависимостей просто пропишите ```python -m pip install -r requirements.txt```
 
 ## БЫСТРЫЙ СТАРТ
 В файлах [dotenv](https://github.com/neluckoff/vk_queue_bot/blob/master/.env) и [settings.py](https://github.com/neluckoff/vk_queue_bot/blob/master/settings.py) хранится основная информация о вашем боте, а именно ``token``, ``group_id`` и ``admin_list``.
