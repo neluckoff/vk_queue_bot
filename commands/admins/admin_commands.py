@@ -3,8 +3,8 @@ from vkbottle.bot import Blueprint, Message
 from data.strings import *
 from data.keyboards import *
 from misc.vk_queue import Users
-from data.csv.csv_works import id_users_csv
 from settings import admin_list
+import sqlite3
 
 vk = Blueprint("Only admins chat command")
 
@@ -34,8 +34,13 @@ async def create_q(message: Message, args=None):
             person = Users(user[0].id, user[0].first_name, user[0].last_name)
             new_queue.add_to_queue(person)
             check.append(user[0].id)
+
+            connect = sqlite3.connect('users.db')
+            cursor = connect.cursor()
+            users_array = []
             await message.answer(admin_queue_created)
-            users_array = id_users_csv()
+            for value in cursor.execute("SELECT * FROM users_info"):
+                users_array.append(value[0])
             if args is None:
                 await vk.api.messages.send(peer_ids=users_array, message="Создана новая очередь!", random_id=0,
                                            keyboard=keyboard_join)
@@ -77,7 +82,12 @@ async def start_q(message: Message):
     else:
         user = await vk.api.users.get(message.from_id)
         if user[0].id in admin_list:
-            users_array = id_users_csv()
+            connect = sqlite3.connect('users.db')
+            cursor = connect.cursor()
+            users_array = []
+            await message.answer(admin_queue_created)
+            for value in cursor.execute("SELECT * FROM users_info"):
+                users_array.append(value[0])
             array_q = new_queue.print_queue()
             id = array_q[0].get_id()
             await vk.api.messages.send(peer_ids=users_array, message="Очердь стартовала, первому игроку приготовиться.",
@@ -191,8 +201,13 @@ async def start_q(message: Message):
     else:
         user = await vk.api.users.get(message.from_id)
         if user[0].id in admin_list:
-            users_array = id_users_csv()
             array_q = new_queue.print_queue()
+            connect = sqlite3.connect('users.db')
+            cursor = connect.cursor()
+            users_array = []
+            await message.answer(admin_queue_created)
+            for value in cursor.execute("SELECT * FROM users_info"):
+                users_array.append(value[0])
             id = array_q[0].get_id()
             await vk.api.messages.send(peer_ids=users_array, message="Очердь стартовала, первому игроку приготовиться.",
                                        random_id=0, keyboard=keyboard_saw_queue)

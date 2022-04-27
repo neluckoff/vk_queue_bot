@@ -3,8 +3,8 @@ from vkbottle.bot import Blueprint, Message
 from data.strings import *
 from data.keyboards import *
 from misc.vk_queue import Users
-from data.csv.csv_works import id_in_csv
 from settings import path
+import sqlite3
 
 vk = Blueprint("Only users chat command")
 
@@ -23,14 +23,24 @@ async def hello(message: Message):
 async def menu(message: Message):
     """Вызов меню со встроенной регистрацией"""
     user = await vk.api.users.get(message.from_id)
-    if id_in_csv(user[0].id):
-        await message.answer(menu_str, keyboard=keyboard_menu)
-    else:
-        with open(path, 'a') as outfile:
-            csv_writer = csv.writer(outfile, delimiter=',')
-            csv_writer.writerow([user[0].id, user[0].first_name, user[0].last_name])
-        print(f'Зарегистрирован новый пользователь - {user[0].first_name} {user[0].last_name} - {user[0].id}')
-        await message.answer(menu_str, keyboard=keyboard_menu)
+    connect = sqlite3.connect('users.db')
+    cursor = connect.cursor()
+
+    cursor.execute("""CREATE TABLE IF NOT EXISTS users_info(
+            id INTEGER,
+            first_name TEXT,
+            last_name TEXT
+        )""")
+    connect.commit()
+
+    cursor.execute(f"SELECT id FROM users_info WHERE id = {user[0].id}")
+
+    if cursor.fetchone() is None:
+        print(f'New user - {user[0].id} - {user[0].first_name} {user[0].last_name}')
+        cursor.execute(f"INSERT INTO users_info VALUES (?, ?, ?);",
+                       (user[0].id, user[0].first_name, user[0].last_name))
+        connect.commit()
+    await message.answer(menu_str, keyboard=keyboard_menu)
 
 
 @vk.on.private_message(text='Посмотреть')
