@@ -1,9 +1,7 @@
-import csv
 from vkbottle.bot import Blueprint, Message
 from data.strings import *
 from data.keyboards import *
 from misc.vk_queue import Users
-from settings import path
 import sqlite3
 
 vk = Blueprint("Only users chat command")
@@ -86,7 +84,7 @@ async def answer_q(message: Message):
             id = new_queue.get_first().get_id()
             await vk.api.messages.send(peer_id=id, message=f'{random_end_answer()} {random_cool_smile()}', random_id=0)
             new_queue.del_person(0)
-
+            check.remove(user[0].id)
             if new_queue.is_empty():
                 pass
             else:
@@ -106,6 +104,7 @@ async def exit_q(message: Message):
         if user[0].id in new_queue.search_by_id():
             a = new_queue.search_by_id()
             new_queue.del_person(a.index(user[0].id))
+            check.remove(user[0].id)
             await message.answer("🚪 Вы вышли из очереди.")
         else:
             await message.answer("📌 Вас нет в очереди.")
