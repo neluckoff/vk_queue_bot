@@ -104,11 +104,17 @@ async def remove_first(message: Message):
         user = await vk.api.users.get(message.from_id)
         if user[0].id in admin_list:
             id = new_queue.get_first().get_id()
-            await vk.api.messages.send(peer_id=id,
+            await vk.api.messages.send(peer_id=user[0].id,
                                        message=f'{new_queue.get_first().get_name()} '
                                                f'{new_queue.get_first().get_lastname()} был убран из очереди.',
                                        random_id=0)
+            if user[0].id != new_queue.get_first().get_id():
+                await vk.api.messages.send(id,
+                                           message=f'{user[0].first_name} '
+                                                   f'{user[0].last_name} убрал Вас из очереди.',
+                                           random_id=0)
             new_queue.del_person(0)
+            check.remove(id)
 
             if new_queue.is_empty():
                 pass
@@ -179,6 +185,7 @@ async def change_person(message: Message, args):
                                                    random_id=0)
                         await message.answer(f'Вы удалили {int(args[0])} пользователя!')
                         new_queue.del_person(int(args[0]) - 1)
+                        check.pop(int(args[0]) - 1)
                     else:
                         await message.answer(f'Вы переборщили с числом, всего в списке '
                                              f'{len(new_queue.print_queue())} человек(-а).')
