@@ -65,6 +65,16 @@ class VkQueue:
         self.queue[index] = self.queue[z_index]
         self.queue[z_index] = c
 
+    def give_first_position(self, index, pos, user):
+        """Передвинуть пользователя на <pos> позицию"""
+        self.queue.pop(index)
+        a = []
+        for i in self.queue:
+            a.append(i)
+        self.queue = a
+
+        self.queue.insert(pos, user)
+
 
 class Users:
     """Класс с информацией о пользователе"""

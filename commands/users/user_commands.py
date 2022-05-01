@@ -83,7 +83,7 @@ async def answer_q(message: Message):
         if new_queue.get_first().get_id() == user[0].id:
             id = new_queue.get_first().get_id()
             await vk.api.messages.send(peer_id=id, message=f'{random_end_answer()} {random_cool_smile()}', random_id=0)
-            new_queue.del_person(0)
+            new_queue.del_person(user[0].id)
             check.remove(user[0].id)
             if new_queue.is_empty():
                 pass

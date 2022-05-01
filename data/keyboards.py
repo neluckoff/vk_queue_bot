@@ -25,8 +25,8 @@ keyboard_admin_menu = (
         .add(Text('Старт'), color=KeyboardButtonColor.PRIMARY)
         .row()
         .add(Text('Меню'), color=KeyboardButtonColor.PRIMARY)
+        .add(Text('Убрать первого'), color=KeyboardButtonColor.NEGATIVE)
         .add(Text('Перемешать'), color=KeyboardButtonColor.PRIMARY)
-        .add(Text('Помощь'), color=KeyboardButtonColor.PRIMARY)
 ).get_json()
 
 keyboard_join = (
@@ -52,4 +52,9 @@ keyboard_reg = (
 keyboard_saw_queue = (
     Keyboard(inline=True)
         .add(Text('Посмотреть'), color=KeyboardButtonColor.PRIMARY)
+).get_json()
+
+keyboard_help_admin = (
+    Keyboard(inline=True)
+        .add(Text('Помощь'), color=KeyboardButtonColor.PRIMARY)
 ).get_json()

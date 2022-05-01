@@ -128,8 +128,11 @@ async def change_me(message: Message, args):
             if user[0].id in admin_list:
                 if args[0].isdigit():
                     if int(args[0]) <= len(new_queue.print_queue()):
-                        for i in range(len(new_queue.print_queue())):
-                            new_queue.remove_person_place(i, int(args[0]) - 1)
+                        person = Users(user[0].id, user[0].first_name, user[0].last_name)
+                        new_queue.give_first_position(check.index(user[0].id), int(args)-1, person)
+
+                        check.remove(user[0].id)
+                        check.insert(int(args)-1, user[0].id)
                         await message.answer(f'Вы переместились на {int(args[0])} позицию в списке.')
                     else:
                         await message.answer(f'Вы переборщили с числом, всего в списке '
@@ -140,7 +143,7 @@ async def change_me(message: Message, args):
             await message.answer("Вы забыли ввести место, на которое хотите встать\nПример: Переместиться на 1")
 
 
-@vk.on.private_message(text='Переместить <arg1> <arg2>')
+@vk.on.private_message(text='Поменять <arg1> <arg2>')
 async def change_person(message: Message, arg1, arg2):
     """Команда, чтобы поменять местами пользователей"""
     if new_queue.is_empty():
