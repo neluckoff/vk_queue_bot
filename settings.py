@@ -1,6 +1,2 @@
-from pathlib import Path
-
-path = Path('data', 'csv', 'data.csv')
-
 """Переменная для хранения всех ID администрации"""
-admin_list = [146653997]  # int ids administration
+admin_list = []  # int ids administration, example: 146653997
